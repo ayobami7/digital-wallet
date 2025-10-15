@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: wallet-service
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/wallet_db
+    username: wallet_user
+    password: wallet_pass
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 20000
+  
+  jpa:
+    hibernate:
+      ddl-auto: none  # We use init.sql instead
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all  # Wait for all replicas
+      retries: 3
+      properties:
+        enable.idempotence: true  # Prevent duplicate messages
+        max.in.flight.requests.per.connection: 1
+    
+server:
+  port: 8080
+
+logging:
+  level:
+    com.wallet: DEBUG
+    org.hibernate.SQL: DEBUG
+
+wallet:
+  kafka:
+    topic: wallet_events

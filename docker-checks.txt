@@ -1,0 +1,14 @@
+# Start all services
+docker-compose up -d
+
+# Check they're running
+docker-compose ps
+
+# View logs
+docker-compose logs -f
+
+# Verify PostgreSQL
+docker exec -it wallet-postgres psql -U wallet_user -d wallet_db -c "\dt"
+
+# Verify Kafka topics
+docker exec -it wallet-kafka kafka-topics --list --bootstrap-server localhost:9092
