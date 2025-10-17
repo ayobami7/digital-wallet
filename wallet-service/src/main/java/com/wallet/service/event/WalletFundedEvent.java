@@ -1,4 +1,4 @@
-package com.wallet.wallet_service.event;  
+package com.wallet.service.event;
 
 
 import java.math.BigDecimal;

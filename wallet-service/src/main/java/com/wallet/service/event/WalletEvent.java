@@ -1,4 +1,4 @@
-package com.wallet.wallet_service.event; 
+package com.wallet.service.event; 
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
